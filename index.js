@@ -127,7 +127,7 @@ app.use(express.static(__dirname));
 app.use('/ac', router);
 
 app.get('*', (req, res) => {
-  res.send('Hello, world!');
+  res.sendFile(path.join(__dirname, 'error.html'));
 });
 
 app.listen(3000, () => {
