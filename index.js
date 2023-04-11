@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
+const path = require('path');
 
 // to scrap the html
 const jsdom = require("jsdom");
@@ -121,6 +122,9 @@ router.get('/g/:groupId/c/:contestId/p/:page/l/:listId', async (req, res) =>{
     let ret = await getAc(url);
     res.status(200).send(ret);
 })
+
+app.use(express.static(__dirname));
+app.use('/ac', router);
 
 app.get('*', (req, res) => {
   res.send('Hello, world!');
