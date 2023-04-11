@@ -1,6 +1,5 @@
-// to start serverless-http
+// to start server-http
 const express = require("express");
-const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
 
@@ -23,17 +22,6 @@ async function getDom(url) {
         const dom = new JSDOM(res.data);
         return dom.window.document;
     })
-    // const API_KEY = 'e4e7dc2ef068a949f0915ee007a50c80'
-    // return axios('http://api.scraperapi.com/', {
-    //     params: {
-    //         'url': url,
-    //         'api_key': API_KEY,
-    //         'render' : true
-    //     }
-    // }).then((res) => {
-    //     const dom = new JSDOM(res.data);
-    //     return dom.window.document;
-    // })
 }
 
 // get ac solutions for each contestant
@@ -134,5 +122,10 @@ router.get('/g/:groupId/c/:contestId/p/:page/l/:listId', async (req, res) =>{
     res.status(200).send(ret);
 })
 
-app.use('/.netlify/functions/ac', router);
-module.exports.handler = serverless(app);
+app.get('*', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.listen(3000, () => {
+  console.log('Server is listening on port 3000');
+});
